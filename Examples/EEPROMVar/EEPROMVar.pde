@@ -1,8 +1,8 @@
 /*
- * EEPROM Read
+ * EEPROMVar 
  *
- * Reads the value of each byte of the EEPROM and prints it
- * to the computer.
+ * Demonstrates the usage of EEPROMvar. A c++ OOP approach 
+ * where a variable can store and restore itself from EEPROM
  * This example code is in the public domain.
  */
 
@@ -13,40 +13,54 @@
 
 const int maxAllowedWrites = 20;
 const int memBase          = 120;
-const int memCeiling       = 250;
 
+void readAndWriteVar(EEPROMVar<float> &floatVar) { 
+    Serial.println("----------------------------------------------");     
+    Serial.println("writing and retreiving EEPROMVar of type float");     
+    Serial.println("----------------------------------------------");  
 
-void readAndWriteVar(EEPROMVar<float> &var) { 
-    Serial.println("storing and retreiving EEPROMVar");     
-    var = 10.5;
-    var++;
-    var+=8.5;
-    var/=2;
+    floatVar = 10.5;    // EEPROMVar supports = operator
+    floatVar++;         // EEPROMVar supports ++ operator
+    floatVar+=8.5;      // EEPROMVar supports += operator
+    floatVar/=2;        // EEPROMVar supports /= operator
     
-    var.save(); 
+    float input = floatVar;
+    floatVar.save();     // store EEPROMVar to EEPROM
     
-    var = 0.0;      
-    var.restore();
-    Serial.print(var);
-    Serial.println(); 
+    floatVar = 0.0;      // reset 
+    floatVar.restore();  // restore EEPROMVar to EEPROM
+    
+    Serial.print("adress: ");
+    Serial.println(floatVar.getAdress());
+    Serial.print("input: ");
+    Serial.println(input);
+    Serial.print("output: ");
+    Serial.println(floatVar);
+    Serial.println();
 }
-
-    
-    
+     
 void setup()
 {
- 
-  Serial.begin(9600);
-  EEPROM.setMemPool(memBase, memCeiling, EEPROMSizeUno);
+  Serial.begin(9600); 
+  delay(100);
+  Serial.println();  
+  
+  // start reading from position memBase (address 0) of the EEPROM. Set maximumSize to EEPROMSizeUno 
+  // Writes before membase or beyond EEPROMSizeUno will only give errors when _EEPROMEX_DEBUG is set
+  EEPROM.setMemPool(memBase, EEPROMSizeUno);  
+    
+  // Set maximum allowed writes to maxAllowedWrites. 
+  // More writes will only give errors when _EEPROMEX_DEBUG is set
   EEPROM.setMaxAllowedWrites(maxAllowedWrites);
   
-  EEPROMVar<float> eepromFloat(5.5);
-
+  // Create Eeprom variables first and in the same order
+  EEPROMVar<float> eepromFloat(5.5);  // initial value 5.5
   
   readAndWriteVar(eepromFloat);
 }
 
 void loop()
 {
+  // Nothing to do during loop
 }
     

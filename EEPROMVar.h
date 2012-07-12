@@ -66,6 +66,14 @@ template<typename T> class EEPROMVar
 	    EEPROM.writeBlock<T>(address, var);
 	  }
 	  
+	  void update(){	   	   
+	    EEPROM.updateBlock<T>(address, var);
+	  }
+	  
+	  int getAdress(){	   	   
+	    return address;
+	  }
+	  
 	  void restore(){
 	  	EEPROM.readBlock<T>(address, var);
 	  }

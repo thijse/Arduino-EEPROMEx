@@ -10,7 +10,7 @@
 #include <Time.h>        //http://www.arduino.cc/playground/Code/Time
 
 /*
-  EEPROMvar.h - EEPROM variable library
+  EEPROMBackupvar.h - EEPROM variable library
   Copyright (c) 2012 Thijs Elenbaas.  All right reserved.
   
   based on class by AlphaBeta
@@ -105,7 +105,7 @@ template<typename T> class EEPROMBackupVar
 	  }	  
 	  void save(){	   	   
         nextPosition();
-		EEPROM.writeBlock<T>(address(position), var);
+		EEPROM.updateBlock<T>(address(position), var);
 		Serial.print("save at position ");
 		Serial.println(position);		
 	  }	  	 
