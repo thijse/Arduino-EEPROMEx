@@ -1,99 +1,198 @@
 /*
- * EEPROM Read
+ * EEPROMEx 
  *
- * Reads the value of each byte of the EEPROM and prints it
+ * Demonstrates reading, writing and updating data in the EEPROM
  * to the computer.
  * This example code is in the public domain.
  */
 
 #include <EEPROMex.h>
 
-// start reading from the first byte (address 0) of the EEPROM
-
-const int maxAllowedWrites = 20;
-const int memBase          = 120;
-const int memCeiling       = 250;
+const int maxAllowedWrites = 40;
+const int memBase          = 250;
 
 int addressByte;
 int addressInt;
 int addressLong;
 int addressFloat;
 int addressDouble;
-int addressString;
+int addressByteArray;
+int addressCharArray;
 
 
-void readAndWriteByte(int adress, byte value) { 
+void issuedAdresses() {
+    Serial.println("-----------------------------------");     
+    Serial.println("Following adresses have been issued");     
+    Serial.println("-----------------------------------");      
+    
+    Serial.println("adress \t\t size");
+    Serial.print(addressByte);      Serial.print(" \t\t "); Serial.println(sizeof(byte)); 
+    Serial.print(addressInt);       Serial.print(" \t\t "); Serial.println(sizeof(int)); 
+    Serial.print(addressLong);      Serial.print(" \t\t "); Serial.println(sizeof(long)); 
+    Serial.print(addressFloat);     Serial.print(" \t\t "); Serial.println(sizeof(float)); 
+    Serial.print(addressDouble);    Serial.print(" \t\t "); Serial.println(sizeof(double));     
+    Serial.print(addressByteArray); Serial.print(" \t\t "); Serial.println(sizeof(sizeof(byte))*7);     
+    Serial.print(addressCharArray); Serial.print(" \t\t "); Serial.println(sizeof(sizeof(char))*7);     
+}
+
+// Test reading and writing byte to EEPROM
+void readAndWriteByte() { 
+    Serial.println("---------------------------");     
     Serial.println("storing and retreiving byte");     
-    EEPROM.write(adress,value);
-    value = 0;      
-    value = EEPROM.read(adress);
-    Serial.print(adress);
-    Serial.print("\t");
-    Serial.print(value, DEC);
-    Serial.println(); 
+    Serial.println("---------------------------");    
+    
+    byte input  = 120;
+    byte output = 0;
+    EEPROM.write(addressByte,input);   // same function as writeByte
+    output = EEPROM.read(addressByte); // same function as readByte
+    
+    Serial.print("adress: ");
+    Serial.println(addressByte);
+    Serial.print("input: ");
+    Serial.println(input);
+    Serial.print("output: ");
+    Serial.println(output);
+    Serial.println("");
+    
 }
 
-void readAndWriteInt(int adress, int value) { 
-    Serial.println("storing and retreiving Int");     
-    EEPROM.writeInt(adress,value);
-    value = 0;      
-    value = EEPROM.readInt(adress);
-    Serial.print(adress);
-    Serial.print("\t");
-    Serial.print(value, DEC);
-    Serial.println(); 
+// Test reading and writing int to EEPROM
+void readAndWriteInt() {  
+    Serial.println("--------------------------");     
+    Serial.println("writing and retreiving int");     
+    Serial.println("--------------------------");    
+            
+    int input  = 30000;
+    int output = 0;
+    EEPROM.writeInt(addressInt,input);
+    output = EEPROM.readInt(addressInt);
+    
+    Serial.print("adress: ");
+    Serial.println(addressInt);
+    Serial.print("input: ");
+    Serial.println(input);
+    Serial.print("output: ");
+    Serial.println(output);
+    Serial.println("");    
 }
 
-void readAndWriteLong(int adress, long value) { 
-    Serial.println("storing and retreiving Long");     
-    EEPROM.writeLong(adress,value);
-    value = 0;      
-    value = EEPROM.readLong(adress);
-    Serial.print(adress);
-    Serial.print("\t");
-    Serial.print(value, DEC);
-    Serial.println(); 
+// Test reading and writing long to EEPROM
+void readAndWriteLong() {    
+    Serial.println("----------------------------");     
+    Serial.println("writing and retreiving Long");     
+    Serial.println("----------------------------");    
+            
+    long input  = 200000000;
+    long output = 0;
+    EEPROM.writeLong(addressLong,input);
+    output = EEPROM.readLong(addressLong);
+    
+    Serial.print("adress: ");
+    Serial.println(addressLong);
+    Serial.print("input: ");
+    Serial.println(input);
+    Serial.print("output: ");
+    Serial.println(output);
+    Serial.println("");    
 }
 
-void readAndWriteFloat(int adress, float value) { 
-    Serial.println("storing and retreiving float");     
-    EEPROM.writeFloat(adress,value);
-    value = 0.0;      
-    value = EEPROM.readFloat(adress);
-    Serial.print(adress);
-    Serial.print("\t");
-    Serial.print(value);
-    Serial.println(); 
+// Test reading and writing float to EEPROM
+void readAndWriteFloat() { 
+    Serial.println("----------------------------");     
+    Serial.println("writing and retreiving float");     
+    Serial.println("----------------------------");    
+            
+    double input  = 1010102.50;
+    double output = 0.0;
+    EEPROM.writeFloat(addressFloat,input);
+    output = EEPROM.readFloat(addressFloat);
+    
+    Serial.print("adress: ");
+    Serial.println(addressFloat);
+    Serial.print("input: ");
+    Serial.println(input);
+    Serial.print("output: ");
+    Serial.println(output);
+    Serial.println("");
 }
 
-void readAndWriteDouble(int adress, double value) { 
-    Serial.println("storing and retreiving double");     
-    EEPROM.writeDouble(adress,value);
-    value = 0.0;      
-    value = EEPROM.readDouble(adress);
-    Serial.print(adress);
-    Serial.print("\t");
-    Serial.print(value);
-    Serial.println(); 
+// Test reading and updating double to EEPROM
+void updateAndReadDouble() { 
+    Serial.println("------------------------------");     
+    Serial.println("updating and retreiving double");     
+    Serial.println("------------------------------");    
+    
+    double input  = 1000002.50;
+    double output = 0.0;
+    EEPROM.updateDouble(addressDouble,input);   
+    output = EEPROM.readDouble(addressDouble);
+    
+    Serial.print("adress: ");
+    Serial.println(addressDouble);
+    Serial.print("input: ");
+    Serial.println(input);
+    Serial.print("output: ");
+    Serial.println(output);
+    Serial.println("");
 }
 
+// Test reading and updating a string (char array) to EEPROM
+void writeAndReadCharArray() {
+    Serial.println("---------------------------------");     
+    Serial.println("writing and reading a char array");     
+    Serial.println("---------------------------------");     
+    
+    char input[] = "Arduino";
+    char output[] = "       ";
 
-void readAndUpdateDouble(int adress, double value) { 
-    Serial.println("storing and retreiving double");     
-    EEPROM.updateDouble(adress,value);
-    EEPROM.updateDouble(adress,value+1);
-    value = 0.0;      
-    value = EEPROM.readDouble(adress);
-    Serial.print(adress);
-    Serial.print("\t");
-    Serial.print(value);
-    Serial.println(); 
+    EEPROM.writeBlock<char>(addressCharArray, input, 7);
+    EEPROM.readBlock<char>(addressCharArray, output, 7);
+
+    Serial.print("adress: ");
+    Serial.println(addressCharArray);
+    Serial.print("input: ");
+    Serial.println(input);
+    Serial.print("output: ");
+    Serial.println(output);
+    Serial.println("");
 }
 
+void writeAndReadByteArray() {
 
-void waitUntilReady(int adress) { 
+    Serial.println("---------------------------------");     
+    Serial.println("updating and reading a byte array");     
+    Serial.println("---------------------------------");     
+    
+    int itemsInArray = 7;
+    byte initial[] = {1, 0, 4, 0, 16, 0 , 64 };
+    byte input[]   = {1, 2, 4, 8, 16, 32, 64 };    
+    byte output[sizeof(input)];
+
+    EEPROM.writeBlock<byte>(addressByteArray, initial, itemsInArray);
+    int writtenBytes = EEPROM.updateBlock<byte>(addressByteArray, input, itemsInArray);
+    EEPROM.readBlock<byte>(addressByteArray, output, itemsInArray);
+
+    Serial.print("input: ");
+    for(int i=0;i<itemsInArray;i++) { Serial.print(input[i]); }
+    Serial.println("");
+    
+    Serial.print("output: ");
+    for(int i=0;i<itemsInArray;i++) { Serial.print(output[i]); }
+    Serial.println("");
+    
+    Serial.print("Total of written bytes by update: "); 
+    Serial.println(writtenBytes);    
+    Serial.println("");
+}
+
+// Check how much time until EEPROM ready to be accessed
+void waitUntilReady() { 
+    Serial.println("-----------------------------------------------------");     
     Serial.println("Check how much time until EEPROM ready to be accessed");     
-    EEPROM.writeLong(adress,10);
+    Serial.println("-----------------------------------------------------");      
+       
+    Serial.print("Time after write: ");     
+    EEPROM.writeLong(addressLong,10);
     
     int loops = 0;
     while (!EEPROM.isReady()) { 
@@ -103,10 +202,25 @@ void waitUntilReady(int adress) {
     Serial.print(loops);
     Serial.print(" ms");
     Serial.println();    
+
+    Serial.print("Time after read: ");    
+    EEPROM.readLong(addressLong);
+    
+    loops = 0;
+    while (!EEPROM.isReady()) { 
+       delay(1);
+       loops++;
+    }
+    Serial.print(loops);
+    Serial.print(" ms");
+    Serial.println();         
 }
 
-
+// Check if we get errors when writing too much or out of bounds
 void errorChecking(int adress) {
+    Serial.println("-------------------------------------------------------------");     
+    Serial.println("Check if we get errors when writing too much or out of bounds");     
+    Serial.println("-------------------------------------------------------------");   
     // Be sure that _EEPROMEX_DEBUG is enabled
 
     Serial.println("Write outside of EEPROM memory");
@@ -121,39 +235,52 @@ void errorChecking(int adress) {
     Serial.println();    
 }
     
-   
+  
 void setup()
 {
- 
   Serial.begin(9600);
-  EEPROM.setMemPool(memBase, memCeiling, EEPROMSizeUno);
+  
+  // start reading from position memBase (address 0) of the EEPROM. Set maximumSize to EEPROMSizeUno 
+  // Writes before membase or beyond EEPROMSizeUno will only give errors when _EEPROMEX_DEBUG is set
+  EEPROM.setMemPool(memBase, EEPROMSizeUno);
+  
+  // Set maximum allowed writes to maxAllowedWrites. 
+  // More writes will only give errors when _EEPROMEX_DEBUG is set
   EEPROM.setMaxAllowedWrites(maxAllowedWrites);
+  delay(100);
+  Serial.println("");       
   
-  // Always get the adresses first
-  addressByte   = EEPROM.getAdress(sizeof(byte));
-  addressInt    = EEPROM.getAdress(sizeof(int));
-  addressLong   = EEPROM.getAdress(sizeof(long));
-  addressFloat  = EEPROM.getAdress(sizeof(float));
-  addressDouble = EEPROM.getAdress(sizeof(double));  
-  
+  // Always get the adresses first and in the same order
+  addressByte      = EEPROM.getAdress(sizeof(byte));
+  addressInt       = EEPROM.getAdress(sizeof(int));
+  addressLong      = EEPROM.getAdress(sizeof(long));
+  addressFloat     = EEPROM.getAdress(sizeof(float));
+  addressDouble    = EEPROM.getAdress(sizeof(double));    
+  addressByteArray = EEPROM.getAdress(sizeof(byte)*7);  
+  addressCharArray = EEPROM.getAdress(sizeof(char)*7);  
+
+  // Show adresses that have been issued
+  issuedAdresses();
 
   // Read and write different data primitives
-  readAndWriteByte(addressByte,120); 
-  readAndWriteInt(addressInt,30000); 
-  readAndWriteLong(addressLong,200000000); 
-  readAndWriteFloat(addressFloat,1000000.50f);     
-  readAndUpdateDouble(addressDouble,1000002.50f); 
+  readAndWriteByte(); 
+  readAndWriteInt(); 
+  readAndWriteLong(); 
+  readAndWriteFloat();     
+  updateAndReadDouble(); 
 
+  // Read and write different data arrays
+  writeAndReadCharArray();   
+  writeAndReadByteArray();   
   
   // Test EEPROM access time
-  //waitUntilReady(addressLong);
+  waitUntilReady();
   
   // Test error checking
-  //errorChecking(addressLong);
-  
+  errorChecking(addressLong);  
 }
 
 void loop()
 {
-}
-    
+  // Nothing to do during loop
+}    

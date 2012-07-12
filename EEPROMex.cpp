@@ -20,9 +20,6 @@
 /******************************************************************************
  * Includes
  ******************************************************************************/
-
-#include <avr/eeprom.h>
-#include "Arduino.h"
 #include "EEPROMEx.h"
 
 /******************************************************************************
@@ -48,18 +45,24 @@ EEPROMClassEx::EEPROMClassEx()
  * User API
  ******************************************************************************/
 
- 
- 
-void EEPROMClassEx::setMemPool(int base, int ceiling, int memSize) {
-	_base = base;
-	_ceiling = ceiling;
-	_nextAvailableAdress=_base;
-	_memSize = memSize;
-}
+void EEPROMClassEx::setMemPool(int base, int memSize) {
+	//Base can only be adjusted if no adresses have already been issued
+	if (_nextAvailableAdress == _base) 
+		_base = base;
+		_nextAvailableAdress=_base;
+	
+	//Ceiling can only be adjusted if not below issued adresses
+	if (memSize >= _nextAvailableAdress ) 
+		_memSize = memSize;
 
-void EEPROMClassEx::setMemPool(int base){
-	_base = base;
-	_nextAvailableAdress=_base;
+	#ifdef _EEPROMEX_DEBUG    
+	if (_nextAvailableAdress != _base) 
+		Serial.println("Cannot change base, adresses have been issued");
+
+	if (memSize < _nextAvailableAdress )  
+		Serial.println("Cannot change ceiling, below issued adresses");
+	#endif	
+	
 }
 
 void EEPROMClassEx::setMaxAllowedWrites(int allowedWrites) {
@@ -73,8 +76,8 @@ int EEPROMClassEx::getAdress(int noOfBytes){
 	_nextAvailableAdress += noOfBytes;
 
 #ifdef _EEPROMEX_DEBUG    
-	if (_nextAvailableAdress > _ceiling) {
-		Serial.println("Attempt to write outside of EEPROM memory pool");
+	if (_nextAvailableAdress > _memSize) {
+		Serial.println("Attempt to write outside of EEPROM memory");
 		return -availableAdress;
 	} else {
 		return availableAdress;
@@ -83,9 +86,10 @@ int EEPROMClassEx::getAdress(int noOfBytes){
 	return availableAdress;		
 }
  
-//All of the read/write functions first make sure the EEPROM is ready to be accessed. Since this may cause long delays if a 
-//write operation is still pending, time-critical applications should first poll the EEPROM e. g. using eeprom_is_ready() 
-//before attempting any actual I/O.
+// All of the read/write functions first make sure the EEPROM is ready to be accessed. 
+// Since this may cause long delays if a  write operation is still pending, time-critical 
+// applications should first poll the EEPROM e. g. using eeprom_is_ready() before 
+// attempting any actual I/O.
 bool EEPROMClassEx::isReady() {
 	return eeprom_is_ready();
 }
@@ -223,7 +227,6 @@ bool EEPROMClassEx::isReadOk(int address)
 }
 
 int EEPROMClassEx::_base= 0;
-int EEPROMClassEx::_ceiling= 512;
 int EEPROMClassEx::_memSize= 512;
 int EEPROMClassEx::_nextAvailableAdress= 0;
 int EEPROMClassEx::_writeCounts =0;

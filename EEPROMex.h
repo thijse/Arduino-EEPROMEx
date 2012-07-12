@@ -20,6 +20,8 @@
 #ifndef EEPROMEX_h
 #define EEPROMEX_h
 
+#include <EEPROM.h>
+
 #if ARDUINO >= 100
 #include <Arduino.h> 
 #else
@@ -50,8 +52,8 @@ class EEPROMClassEx
   public:
 	EEPROMClassEx();
 	bool 	 isReady();
-    void 	 setMemPool(int low, int high, int memSize);
-	void 	 setMemPool(int low);
+	int 	 writtenBytes();
+    void 	 setMemPool(int base, int memSize);
 	void  	 setMaxAllowedWrites(int allowedWrites);
 	int 	 getAdress(int noOfBytes);
     uint8_t  read(int);
@@ -60,6 +62,7 @@ class EEPROMClassEx
     uint32_t readLong(int);
 	float    readFloat(int);
 	double   readDouble(int);
+	
 	
 	// expose explicit AVR functions
     bool     write(int, uint8_t);
@@ -70,10 +73,30 @@ class EEPROMClassEx
 	bool 	 writeDouble(int, double);
 
     // Use template for other data formats
-	template <class T> int readBlock(int address, T& value)
+
+
+	template <class T> int readBlock(int address, const T value[], int items)
+	{
+		if (!isWriteOk(address+items*sizeof(T))) return 0;
+		unsigned int i;
+		for (i = 0; i < items; i++) 
+			readBlock<T>(address+(i*sizeof(T)),value[i]);
+		return i;
+	}
+	
+	template <class T> int readBlock(int address, const T& value)
 	{		
 		eeprom_read_block((void*)&value, (const void*)address, sizeof(value));
 		return sizeof(value);
+	}
+	
+	template <class T> int writeBlock(int address, const T value[], int items)
+	{	
+		if (!isWriteOk(address+items*sizeof(T))) return 0;
+		unsigned int i;
+		for (i = 0; i < items; i++) 
+			  writeBlock<T>(address+(i*sizeof(T)),value[i]);
+		return i;
 	}
 	
 	template <class T> int writeBlock(int address, const T& value)
@@ -82,21 +105,31 @@ class EEPROMClassEx
 		eeprom_write_block((void*)&value, (void*)address, sizeof(value));			  			  
 		return sizeof(value);
 	}
-		
+
+	template <class T> int updateBlock(int address, const T value[], int items)
+	{
+		int writeCount=0;
+		if (!isWriteOk(address+items*sizeof(T))) return 0;
+		unsigned int i;
+		for (i = 0; i < items; i++) 
+			  writeCount+= updateBlock<T>(address+(i*sizeof(T)),value[i]);
+		return writeCount;
+	}
+	
 	template <class T> int updateBlock(int address, const T& value)
 	{
+		int writeCount=0;
 		if (!isWriteOk(address+sizeof(value))) return 0;
 		const byte* bytePointer = (const byte*)(const void*)&value;
-		unsigned int i;
-		for (i = 0; i < sizeof(value); i++) {
+		for (unsigned int i = 0; i < sizeof(value); i++) {
 			if (read(address)!=*bytePointer) {
 				write(address, *bytePointer);
-				Serial.print("update");
+				writeCount++;		
 			}
 			address++;
 			*bytePointer++;
 		}
-		return i;
+		return writeCount;
 	}
 	
 	bool     update(int, uint8_t);
@@ -108,8 +141,8 @@ class EEPROMClassEx
 	
 	
 private:
+	//Private variables
 	static int _base;
-	static int _ceiling;
 	static int _memSize;
 	static int _nextAvailableAdress;	
 	static int _writeCounts;
