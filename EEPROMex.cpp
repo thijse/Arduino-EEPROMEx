@@ -46,21 +46,21 @@ EEPROMClassEx::EEPROMClassEx()
  ******************************************************************************/
 
 void EEPROMClassEx::setMemPool(int base, int memSize) {
-	//Base can only be adjusted if no adresses have already been issued
-	if (_nextAvailableAdress == _base) 
+	//Base can only be adjusted if no addresses have already been issued
+	if (_nextAvailableaddress == _base) 
 		_base = base;
-		_nextAvailableAdress=_base;
+		_nextAvailableaddress=_base;
 	
-	//Ceiling can only be adjusted if not below issued adresses
-	if (memSize >= _nextAvailableAdress ) 
+	//Ceiling can only be adjusted if not below issued addresses
+	if (memSize >= _nextAvailableaddress ) 
 		_memSize = memSize;
 
 	#ifdef _EEPROMEX_DEBUG    
-	if (_nextAvailableAdress != _base) 
-		Serial.println("Cannot change base, adresses have been issued");
+	if (_nextAvailableaddress != _base) 
+		Serial.println("Cannot change base, addresses have been issued");
 
-	if (memSize < _nextAvailableAdress )  
-		Serial.println("Cannot change ceiling, below issued adresses");
+	if (memSize < _nextAvailableaddress )  
+		Serial.println("Cannot change ceiling, below issued addresses");
 	#endif	
 	
 }
@@ -71,19 +71,19 @@ void EEPROMClassEx::setMaxAllowedWrites(int allowedWrites) {
 #endif			
 }
 
-int EEPROMClassEx::getAdress(int noOfBytes){
-	int availableAdress   = _nextAvailableAdress;
-	_nextAvailableAdress += noOfBytes;
+int EEPROMClassEx::getAddress(int noOfBytes){
+	int availableaddress   = _nextAvailableaddress;
+	_nextAvailableaddress += noOfBytes;
 
 #ifdef _EEPROMEX_DEBUG    
-	if (_nextAvailableAdress > _memSize) {
+	if (_nextAvailableaddress > _memSize) {
 		Serial.println("Attempt to write outside of EEPROM memory");
-		return -availableAdress;
+		return -availableaddress;
 	} else {
-		return availableAdress;
+		return availableaddress;
 	}
 #endif
-	return availableAdress;		
+	return availableaddress;		
 }
  
 // All of the read/write functions first make sure the EEPROM is ready to be accessed. 
@@ -228,7 +228,7 @@ bool EEPROMClassEx::isReadOk(int address)
 
 int EEPROMClassEx::_base= 0;
 int EEPROMClassEx::_memSize= 512;
-int EEPROMClassEx::_nextAvailableAdress= 0;
+int EEPROMClassEx::_nextAvailableaddress= 0;
 int EEPROMClassEx::_writeCounts =0;
 
 EEPROMClassEx EEPROM;

@@ -55,7 +55,7 @@ class EEPROMClassEx
 	int 	 writtenBytes();
     void 	 setMemPool(int base, int memSize);
 	void  	 setMaxAllowedWrites(int allowedWrites);
-	int 	 getAdress(int noOfBytes);
+	int 	 getAddress(int noOfBytes);
     uint8_t  read(int);
 	uint8_t  readByte(int);
     uint16_t readInt(int);
@@ -144,7 +144,7 @@ private:
 	//Private variables
 	static int _base;
 	static int _memSize;
-	static int _nextAvailableAdress;	
+	static int _nextAvailableaddress;	
 	static int _writeCounts;
 	int _allowedWrites;	
 	bool checkWrite(int base,int noOfBytes);	

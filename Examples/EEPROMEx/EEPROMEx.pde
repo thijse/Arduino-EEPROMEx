@@ -8,8 +8,21 @@
 
 #include <EEPROMex.h>
 
-const int maxAllowedWrites = 40;
-const int memBase          = 250;
+#include "Arduino.h"
+void issuedAdresses();
+void readAndWriteByte();
+void readAndWriteInt();
+void readAndWriteLong();
+void readAndWriteFloat();
+void updateAndReadDouble();
+void writeAndReadCharArray();
+void writeAndReadByteArray();
+void waitUntilReady();
+void errorChecking(int adress);
+void setup();
+void loop();
+const int maxAllowedWrites = 80;
+const int memBase          = 350;
 
 int addressByte;
 int addressInt;
@@ -26,13 +39,13 @@ void issuedAdresses() {
     Serial.println("-----------------------------------");      
     
     Serial.println("adress \t\t size");
-    Serial.print(addressByte);      Serial.print(" \t\t "); Serial.println(sizeof(byte)); 
-    Serial.print(addressInt);       Serial.print(" \t\t "); Serial.println(sizeof(int)); 
-    Serial.print(addressLong);      Serial.print(" \t\t "); Serial.println(sizeof(long)); 
-    Serial.print(addressFloat);     Serial.print(" \t\t "); Serial.println(sizeof(float)); 
-    Serial.print(addressDouble);    Serial.print(" \t\t "); Serial.println(sizeof(double));     
-    Serial.print(addressByteArray); Serial.print(" \t\t "); Serial.println(sizeof(sizeof(byte))*7);     
-    Serial.print(addressCharArray); Serial.print(" \t\t "); Serial.println(sizeof(sizeof(char))*7);     
+    Serial.print(addressByte);      Serial.print(" \t\t "); Serial.print(sizeof(byte)); Serial.println(" (byte)");
+    Serial.print(addressInt);       Serial.print(" \t\t "); Serial.print(sizeof(int));  Serial.println(" (int)");
+    Serial.print(addressLong);      Serial.print(" \t\t "); Serial.print(sizeof(long)); Serial.println(" (long)"); 
+    Serial.print(addressFloat);     Serial.print(" \t\t "); Serial.print(sizeof(float)); Serial.println(" (float)");  
+    Serial.print(addressDouble);    Serial.print(" \t\t "); Serial.print(sizeof(double));  Serial.println(" (double)");    
+    Serial.print(addressByteArray); Serial.print(" \t\t "); Serial.print(sizeof(byte)*7); Serial.println(" (array of 7 bytes)");     
+    Serial.print(addressCharArray); Serial.print(" \t\t "); Serial.print(sizeof(char)*7); Serial.println(" (array of 7 chars)");    
 }
 
 // Test reading and writing byte to EEPROM
@@ -190,30 +203,85 @@ void waitUntilReady() {
     Serial.println("-----------------------------------------------------");     
     Serial.println("Check how much time until EEPROM ready to be accessed");     
     Serial.println("-----------------------------------------------------");      
-       
-    Serial.print("Time after write: ");     
-    EEPROM.writeLong(addressLong,10);
-    
-    int loops = 0;
-    while (!EEPROM.isReady()) { 
-       delay(1);
-       loops++;
-    }
-    Serial.print(loops);
-    Serial.print(" ms");
-    Serial.println();    
+    int startMillis;
+    int endMillis;   
 
-    Serial.print("Time after read: ");    
-    EEPROM.readLong(addressLong);
+    // Write byte        
+    startMillis = millis();
+    EEPROM.writeByte(addressByte,16);
+    endMillis = millis();            
+    Serial.print("Time to write 1 byte  (ms)                        : "); 
+    Serial.println(endMillis-startMillis); 
+
+    // Wait for ready    
+    endMillis = 0;   
+    while (!EEPROM.isReady()) { delay(1); endMillis++; }
+
+    Serial.print("Recovery time after writing byte (ms)             : "); 
+    Serial.println(endMillis);    
+            
+    // Write long        
+    startMillis = millis();
+    EEPROM.writeLong(addressLong,106);
+    endMillis = millis();    
+        
+    Serial.print("Time to write Long (4 bytes) (ms)                 : "); 
+    Serial.println(endMillis-startMillis); 
     
-    loops = 0;
-    while (!EEPROM.isReady()) { 
-       delay(1);
-       loops++;
-    }
-    Serial.print(loops);
-    Serial.print(" ms");
-    Serial.println();         
+    // Wait for ready    
+    endMillis = 0;   
+    while (!EEPROM.isReady()) { delay(1); endMillis++; }
+
+    Serial.print("Recovery time after writing long (ms)             : "); 
+    Serial.println(endMillis);    
+    
+    // Read long
+    startMillis = millis();
+    EEPROM.readLong(addressLong);
+    endMillis = millis();
+    Serial.print("Time to read Long (4 bytes) (ms)                  : ");    
+    Serial.println(endMillis-startMillis); 
+    
+    // Wait for ready    
+    endMillis = 0;   
+    while (!EEPROM.isReady()) { delay(1); endMillis++; }
+
+    Serial.print("Recovery time after reading long (ms)             : "); 
+    Serial.println(endMillis);      
+ 
+    int itemsInArray = 7;
+    byte array7[]    = {64, 32, 16, 8 , 4 , 2 , 1 };
+    byte arraydif7[] = {1 , 2 , 4 , 8 , 16, 32, 64};    
+    byte arrayDif3[] = {1 , 0 , 4 , 0 , 16, 0 , 64};
+    byte output[sizeof(array7)];
+
+    // Time to write 7 byte array 
+    startMillis = millis();
+    EEPROM.writeBlock<byte>(addressByteArray, array7, itemsInArray);
+    endMillis = millis(); 
+    Serial.print("Time to write 7 byte array  (ms)                  : ");    
+    Serial.println(endMillis-startMillis); 
+
+    // Time to update 7 byte array with 7 new values
+    startMillis = millis();    
+    EEPROM.updateBlock<byte>(addressByteArray, arraydif7, itemsInArray);
+    endMillis = millis(); 
+    Serial.print("Time to update 7 byte array with 7 new values (ms): ");    
+    Serial.println(endMillis-startMillis); 
+
+    // Time to update 7 byte array with 3 new values
+    startMillis = millis();    
+    EEPROM.updateBlock<byte>(addressByteArray, arrayDif3, itemsInArray);
+    endMillis = millis(); 
+    Serial.print("Time to update 7 byte array with 3 new values (ms): ");    
+    Serial.println(endMillis-startMillis);
+
+    // Time to read 7 byte array
+    startMillis = millis(); 
+    EEPROM.readBlock<byte>(addressByteArray, output, itemsInArray);   
+    endMillis = millis(); 
+    Serial.print("Time to read 7 byte array (ms)                    : ");    
+    Serial.println(endMillis-startMillis);
 }
 
 // Check if we get errors when writing too much or out of bounds
@@ -251,13 +319,13 @@ void setup()
   Serial.println("");       
   
   // Always get the adresses first and in the same order
-  addressByte      = EEPROM.getAdress(sizeof(byte));
-  addressInt       = EEPROM.getAdress(sizeof(int));
-  addressLong      = EEPROM.getAdress(sizeof(long));
-  addressFloat     = EEPROM.getAdress(sizeof(float));
-  addressDouble    = EEPROM.getAdress(sizeof(double));    
-  addressByteArray = EEPROM.getAdress(sizeof(byte)*7);  
-  addressCharArray = EEPROM.getAdress(sizeof(char)*7);  
+  addressByte      = EEPROM.getAddress(sizeof(byte));
+  addressInt       = EEPROM.getAddress(sizeof(int));
+  addressLong      = EEPROM.getAddress(sizeof(long));
+  addressFloat     = EEPROM.getAddress(sizeof(float));
+  addressDouble    = EEPROM.getAddress(sizeof(double));    
+  addressByteArray = EEPROM.getAddress(sizeof(byte)*7);  
+  addressCharArray = EEPROM.getAddress(sizeof(char)*7);  
 
   // Show adresses that have been issued
   issuedAdresses();
@@ -284,3 +352,5 @@ void loop()
 {
   // Nothing to do during loop
 }    
+
+
