@@ -56,22 +56,32 @@ class EEPROMClassEx
     void 	 setMemPool(int base, int memSize);
 	void  	 setMaxAllowedWrites(int allowedWrites);
 	int 	 getAddress(int noOfBytes);
-    uint8_t  read(int);
+    
+	uint8_t  read(int);	
+	bool 	 readBit(int, byte);
 	uint8_t  readByte(int);
     uint16_t readInt(int);
     uint32_t readLong(int);
 	float    readFloat(int);
 	double   readDouble(int);
-	
-	
-	// expose explicit AVR functions
+			
     bool     write(int, uint8_t);
+	bool 	 writeBit(int , uint8_t, bool);
 	bool     writeByte(int, uint8_t);
 	bool 	 writeInt(int, uint16_t);
 	bool 	 writeLong(int, uint32_t);
 	bool 	 writeFloat(int, float);
 	bool 	 writeDouble(int, double);
 
+	bool     update(int, uint8_t);
+	bool 	 updateBit(int , uint8_t, bool);
+	bool     updateByte(int, uint8_t);
+	bool 	 updateInt(int, uint16_t);
+	bool 	 updateLong(int, uint32_t);
+	bool 	 updateFloat(int, float);
+	bool 	 updateDouble(int, double);
+
+	
     // Use template for other data formats
 
 
@@ -132,12 +142,6 @@ class EEPROMClassEx
 		return writeCount;
 	}
 	
-	bool     update(int, uint8_t);
-	bool     updateByte(int, uint8_t);
-	bool 	 updateInt(int, uint16_t);
-	bool 	 updateLong(int, uint32_t);
-	bool 	 updateFloat(int, float);
-	bool 	 updateDouble(int, double);
 	
 	
 private:

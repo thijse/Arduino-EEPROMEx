@@ -37,7 +37,7 @@
 // Boards with ATmega168, Lilypad, old Nano, Diecimila  – 512 bytes
 // By default we choose conservative settings
 EEPROMClassEx::EEPROMClassEx()
-  :  _allowedWrites(0)
+  :  _allowedWrites(100)
 {
 }
  
@@ -86,10 +86,7 @@ int EEPROMClassEx::getAddress(int noOfBytes){
 	return availableaddress;		
 }
  
-// All of the read/write functions first make sure the EEPROM is ready to be accessed. 
-// Since this may cause long delays if a  write operation is still pending, time-critical 
-// applications should first poll the EEPROM e. g. using eeprom_is_ready() before 
-// attempting any actual I/O.
+
 bool EEPROMClassEx::isReady() {
 	return eeprom_is_ready();
 }
@@ -97,6 +94,14 @@ bool EEPROMClassEx::isReady() {
 uint8_t EEPROMClassEx::read(int address)
 {
 	return readByte(address);
+}
+
+bool EEPROMClassEx::readBit(int address, byte bit) {
+	  if (bit> 7) return false; 
+	  if (!isReadOk(address+sizeof(uint8_t))) return false;
+	  byte byteVal =  eeprom_read_byte((unsigned char *) address);      
+	  byte bytePos = (1 << bit);
+      return (byteVal & bytePos);
 }
 
 uint8_t EEPROMClassEx::readByte(int address)
@@ -138,6 +143,11 @@ bool EEPROMClassEx::write(int address, uint8_t value)
 	return writeByte(address, value);
 }
 
+bool EEPROMClassEx::writeBit(int address, uint8_t bit, bool value) {
+	updateBit(address, bit, value);
+}
+
+
 bool EEPROMClassEx::writeByte(int address, uint8_t value)
 {
 	if (!isWriteOk(address+sizeof(uint8_t))) return false;
@@ -164,9 +174,32 @@ bool EEPROMClassEx::writeFloat(int address, float value)
 	return (writeBlock<float>(address, value)!=0);	
 }
 
+bool EEPROMClassEx::writeDouble(int address, double value)
+{
+	return (writeBlock<float>(address, value)!=0);	
+}
+
 bool EEPROMClassEx::update(int address, uint8_t value)
 {
 	return (updateByte(address, value));
+}
+
+bool EEPROMClassEx::updateBit(int address, uint8_t bit, bool value) 
+{
+	  if (bit> 7) return false; 
+	  
+	  byte byteValInput  = readByte(address);
+	  byte byteValOutput = byteValInput;	  
+	  // Set bit
+	  if (value) {	    
+		byteValOutput |= (1 << bit);  //Set bit to 1
+	  } else {		
+	    byteValOutput &= !(1 << bit); //Set bit to 0
+	  }
+	  // Store if different from input
+	  if (byteValOutput!=byteValInput) {
+		writeByte(address, byteValOutput);	  
+	  }
 }
 
 bool EEPROMClassEx::updateByte(int address, uint8_t value)

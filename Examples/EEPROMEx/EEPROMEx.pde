@@ -204,51 +204,47 @@ void waitUntilReady() {
     Serial.println("Check how much time until EEPROM ready to be accessed");     
     Serial.println("-----------------------------------------------------");      
     int startMillis;
-    int endMillis;   
+    int endMillis; 
+    int waitMillis;
 
-    // Write byte        
+    // Write byte..       
     startMillis = millis();
     EEPROM.writeByte(addressByte,16);
     endMillis = millis();            
+    // .. and wait for ready    
+    waitMillis = 0;   
+    while (!EEPROM.isReady()) { delay(1); waitMillis++; }
+
     Serial.print("Time to write 1 byte  (ms)                        : "); 
     Serial.println(endMillis-startMillis); 
-
-    // Wait for ready    
-    endMillis = 0;   
-    while (!EEPROM.isReady()) { delay(1); endMillis++; }
-
     Serial.print("Recovery time after writing byte (ms)             : "); 
-    Serial.println(endMillis);    
+    Serial.println(waitMillis);    
             
-    // Write long        
+    // Write long ..       
     startMillis = millis();
     EEPROM.writeLong(addressLong,106);
-    endMillis = millis();    
-        
+    endMillis = millis();               
+    // .. and wait for ready    
+    waitMillis = 0;   
+    while (!EEPROM.isReady()) { delay(1); waitMillis++; }
     Serial.print("Time to write Long (4 bytes) (ms)                 : "); 
     Serial.println(endMillis-startMillis); 
-    
-    // Wait for ready    
-    endMillis = 0;   
-    while (!EEPROM.isReady()) { delay(1); endMillis++; }
-
     Serial.print("Recovery time after writing long (ms)             : "); 
-    Serial.println(endMillis);    
+    Serial.println(waitMillis);    
     
-    // Read long
+    // Read long ..
     startMillis = millis();
     EEPROM.readLong(addressLong);
     endMillis = millis();
+    // .. and wait for ready      
+    waitMillis = 0;   
+    while (!EEPROM.isReady()) { delay(1); waitMillis++; }
     Serial.print("Time to read Long (4 bytes) (ms)                  : ");    
-    Serial.println(endMillis-startMillis); 
-    
-    // Wait for ready    
-    endMillis = 0;   
-    while (!EEPROM.isReady()) { delay(1); endMillis++; }
-
+    Serial.println(endMillis-startMillis);     
     Serial.print("Recovery time after reading long (ms)             : "); 
-    Serial.println(endMillis);      
+    Serial.println(waitMillis);      
  
+    // Write times arrays 
     int itemsInArray = 7;
     byte array7[]    = {64, 32, 16, 8 , 4 , 2 , 1 };
     byte arraydif7[] = {1 , 2 , 4 , 8 , 16, 32, 64};    
