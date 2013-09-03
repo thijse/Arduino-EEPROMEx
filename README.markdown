@@ -2,20 +2,20 @@
 
 The EEPROMex library is an extension of the standard Arduino EEPROM library. It extends the functionality of the original Arduino EEPROM library with:
 
-*Reading, writing to basic types. This includes  bytes, longs, ints, floats and doubles.
-*Reading, writing to single bits. This helps efficient usage of the limited EEPROM memory.
-*Reading, writing of any data format. This can be for example structs, strings, etc.
-*Reading, writing of arrays of any format. By storing, for example, arrays of structs one can create a database like structure.
-*Update functions. The function similar to write functions, but only update changed bytes. If structures have only changed partly, updating instead of writing can save a lot EEPROM wear and significantly increase speed.
-*Basic memory allocation functionality. This is basically a counter of the first unallocated byte, and helps giving unique addresses to variables.
-*Enabling write limitation: In theory one can burn out a memory cell in a few minutes: a write/erase cycle takes approximately 4 ms, so writing 100.000 times to a single cell takes 6 1/2 min. Limiting the number of writes during the debug phase helps prevent this.
+* Reading, writing to basic types. This includes  bytes, longs, ints, floats and doubles.
+* Reading, writing to single bits. This helps efficient usage of the limited EEPROM memory.
+* Reading, writing of any data format. This can be for example structs, strings, etc.
+* Reading, writing of arrays of any format. By storing, for example, arrays of structs one can create a database like structure.
+* Update functions. The function similar to write functions, but only update changed bytes. If structures have only changed partly, updating instead of writing can save a lot EEPROM wear and significantly increase speed.
+* Basic memory allocation functionality. This is basically a counter of the first unallocated byte, and helps giving unique addresses to variables.
+* Enabling write limitation: In theory one can burn out a memory cell in a few minutes: a write/erase cycle takes approximately 4 ms, so writing 100.000 times to a single cell takes 6 1/2 min. Limiting the number of writes during the debug phase helps prevent this.
 *Debugging of writing out of memory range.
 
-You can download the library here: \\
-[[http://thijs.elenbaas.net/downloads/?did=3]]
+You can download the library here: 
+http://thijs.elenbaas.net/downloads/?did=3
  
-And find detailed explanation and samples of the functionality here: \\
-[[http://thijs.elenbaas.net/2012/07/extended-eeprom-library-for-arduino]]
+And find detailed explanation and samples of the functionality here: 
+http://thijs.elenbaas.net/2012/07/extended-eeprom-library-for-arduino
 
 ### Using different data formats
 
