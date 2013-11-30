@@ -35,6 +35,9 @@
 #define EEPROMSizeATmega168   512     
 #define EEPROMSizeATmega328   1024     
 #define EEPROMSizeATmega1280  4096     
+#define EEPROMSizeATmega32u4  1024
+#define EEPROMSizeAT90USB1286 4096
+#define EEPROMSizeMK20DX128   2048
 
 #define EEPROMSizeUno         EEPROMSizeATmega328     
 #define EEPROMSizeUnoSMD      EEPROMSizeATmega328
@@ -43,6 +46,12 @@
 #define EEPROMSizeMega        EEPROMSizeATmega1280
 #define EEPROMSizeDiecimila   EEPROMSizeATmega168
 #define EEPROMSizeNano        EEPROMSizeATmega168
+#define EEPROMSizeTeensy2     EEPROMSizeATmega32u4
+#define EEPROMSizeLeonardo    EEPROMSizeATmega32u4
+#define EEPROMSizeMicro       EEPROMSizeATmega32u4
+#define EEPROMSizeYun         EEPROMSizeATmega32u4
+#define EEPROMSizeTeensy2pp   EEPROMSizeAT90USB1286
+#define EEPROMSizeTeensy3     EEPROMSizeMK20DX128
 
 class EEPROMClassEx
 {
