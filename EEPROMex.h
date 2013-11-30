@@ -20,8 +20,6 @@
 #ifndef EEPROMEX_h
 #define EEPROMEX_h
 
-#include <EEPROM.h>
-
 #if ARDUINO >= 100
 #include <Arduino.h> 
 #else
