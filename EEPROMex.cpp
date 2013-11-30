@@ -145,6 +145,7 @@ bool EEPROMClassEx::write(int address, uint8_t value)
 
 bool EEPROMClassEx::writeBit(int address, uint8_t bit, bool value) {
 	updateBit(address, bit, value);
+	return true;
 }
 
 
@@ -200,6 +201,7 @@ bool EEPROMClassEx::updateBit(int address, uint8_t bit, bool value)
 	  if (byteValOutput!=byteValInput) {
 		writeByte(address, byteValOutput);	  
 	  }
+	  return true;
 }
 
 bool EEPROMClassEx::updateByte(int address, uint8_t value)
