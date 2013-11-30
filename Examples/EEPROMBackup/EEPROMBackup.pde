@@ -55,6 +55,9 @@ EEPROMBackupVar<time_t> timeBackup(minTime,100,CompareFunc,1*SECS_PER_MIN);
 void setup()
 {
   Serial.begin(9600);
+  while (!Serial) {
+    ; // wait for serial port to connect. Needed for Leonardo only
+  }
   
   // start reading from position memBase (address 0) of the EEPROM. Set maximumSize to EEPROMSizeUno 
   // Writes before membase or beyond EEPROMSizeUno will only give errors when _EEPROMEX_DEBUG is set
