@@ -135,7 +135,7 @@ class EEPROMClassEx
 				writeCount++;		
 			}
 			address++;
-			*bytePointer++;
+			bytePointer++;
 		}
 		return writeCount;
 	}
