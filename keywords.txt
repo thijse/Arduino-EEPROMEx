@@ -9,7 +9,7 @@
 isReady			KEYWORD2
 setMemPool		KEYWORD2
 setMaxAllowedWrites	KEYWORD2
-getAdress		KEYWORD2
+getAddress		KEYWORD2
 
 read			KEYWORD2
 readByte		KEYWORD2
