@@ -195,7 +195,7 @@ bool EEPROMClassEx::updateBit(int address, uint8_t bit, bool value)
 	  if (value) {	    
 		byteValOutput |= (1 << bit);  //Set bit to 1
 	  } else {		
-	    byteValOutput &= !(1 << bit); //Set bit to 0
+	    byteValOutput &= ~(1 << bit); //Set bit to 0
 	  }
 	  // Store if different from input
 	  if (byteValOutput!=byteValInput) {
