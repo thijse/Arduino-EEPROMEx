@@ -70,7 +70,7 @@ template<typename T> class EEPROMVar
 	    EEPROM.updateBlock<T>(address, var);
 	  }
 	  
-	  int getAdress(){	   	   
+	  int getAddress(){	   	   
 	    return address;
 	  }
 	  
