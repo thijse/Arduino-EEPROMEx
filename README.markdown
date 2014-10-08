@@ -109,6 +109,9 @@ Based on processor:
 *EEPROMSizeATmega168
 *EEPROMSizeATmega328
 *EEPROMSizeATmega1280
+*EEPROMSizeATmega32u4
+*EEPROMSizeAT90USB1286
+*EEPROMSizeMK20DX128
 ```
 Based on board:
 ```
@@ -119,6 +122,12 @@ Based on board:
 *EEPROMSizeMega
 *EEPROMSizeDiecimila
 *EEPROMSizeNano
+*EEPROMSizeTeensy2
+*EEPROMSizeLeonardo
+*EEPROMSizeMicro
+*EEPROMSizeYun
+*EEPROMSizeTeensy2pp
+*EEPROMSizeTeensy3
 ```
 
 ### EEPROM performance
