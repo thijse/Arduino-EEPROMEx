@@ -12,7 +12,7 @@ The EEPROMex library is an extension of the standard Arduino EEPROM library. It 
 * Debugging of writing out of memory range.
 
 You can download the library here: 
-[http://thijs.elenbaas.net/downloads/?did=3](http://thijs.elenbaas.net/downloads/?did=3)
+[http://thijs.elenbaas.net/downloads/?did=3](http://thijs.elenbaas.net/downloads)
  
 And find detailed explanation and samples of the functionality here: 
 [http://thijs.elenbaas.net/2012/07/extended-eeprom-library-for-arduino](http://thijs.elenbaas.net/2012/07/extended-eeprom-library-for-arduino)
