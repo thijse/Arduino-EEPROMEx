@@ -12,7 +12,7 @@ The EEPROMex library is an extension of the standard Arduino EEPROM library. It 
 * Debugging of writing out of memory range.
 
 You can download the library here: 
-[http://thijs.elenbaas.net/downloads/?did=3](http://thijs.elenbaas.net/downloads/?did=3)
+[http://thijs.elenbaas.net/downloads/?did=3](http://thijs.elenbaas.net/downloads)
  
 And find detailed explanation and samples of the functionality here: 
 [http://thijs.elenbaas.net/2012/07/extended-eeprom-library-for-arduino](http://thijs.elenbaas.net/2012/07/extended-eeprom-library-for-arduino)
@@ -109,6 +109,9 @@ Based on processor:
 *EEPROMSizeATmega168
 *EEPROMSizeATmega328
 *EEPROMSizeATmega1280
+*EEPROMSizeATmega32u4
+*EEPROMSizeAT90USB1286
+*EEPROMSizeMK20DX128
 ```
 Based on board:
 ```
@@ -119,6 +122,12 @@ Based on board:
 *EEPROMSizeMega
 *EEPROMSizeDiecimila
 *EEPROMSizeNano
+*EEPROMSizeTeensy2
+*EEPROMSizeLeonardo
+*EEPROMSizeMicro
+*EEPROMSizeYun
+*EEPROMSizeTeensy2pp
+*EEPROMSizeTeensy3
 ```
 
 ### EEPROM performance
