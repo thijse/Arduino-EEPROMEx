@@ -3,11 +3,16 @@
   "keywords": "eeprom",
   "description": "Extension of the standard Arduino EEPROM library for reading and writing basic types, structs, strings, arrays and more.",
   "include": "EEPROMEx",
+  "authors":
+  [
+    {
+      "name": "Thijs Elenbaas"
+    }
+  ],
   "repository":
   {
     "type": "git",
     "url": "https://github.com/thijse/Arduino-Libraries.git"
   },
-  "frameworks": "arduino",
-  "platforms": "atmelavr"
+  "frameworks": "arduino"
 }
