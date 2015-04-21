@@ -1,4 +1,4 @@
-# Arduino EEPROMex library 
+# Arduino EEPROMEx library 
 
 The EEPROMex library is an extension of the standard Arduino EEPROM library. It extends the functionality of the original Arduino EEPROM library with:
 
