@@ -91,7 +91,9 @@ class EEPROMClassEx
 	
     // Use template for other data formats
 
-
+	/**
+	 * Template function to read  multiple items of any type of variable, such as structs
+	 */
 	template <class T> int readBlock(int address, const T value[], int items)
 	{
 		unsigned int i;
@@ -99,13 +101,19 @@ class EEPROMClassEx
 			readBlock<T>(address+(i*sizeof(T)),value[i]);
 		return i;
 	}
-	
+
+	/**
+	 * Template function to read any type of variable, such as structs
+	 */	
 	template <class T> int readBlock(int address, const T& value)
 	{		
 		eeprom_read_block((void*)&value, (const void*)address, sizeof(value));
 		return sizeof(value);
 	}
 	
+	/**
+	 * Template function to write multiple items of any type of variable, such as structs
+	 */	
 	template <class T> int writeBlock(int address, const T value[], int items)
 	{	
 		if (!isWriteOk(address+items*sizeof(T))) return 0;
@@ -114,14 +122,21 @@ class EEPROMClassEx
 			  writeBlock<T>(address+(i*sizeof(T)),value[i]);
 		return i;
 	}
-	
+
+	/**
+	 * Template function to write any type of variable, such as structs
+	 */		
 	template <class T> int writeBlock(int address, const T& value)
 	{
 		if (!isWriteOk(address+sizeof(value))) return 0;
 		eeprom_write_block((void*)&value, (void*)address, sizeof(value));			  			  
 		return sizeof(value);
 	}
-
+	 
+	/**
+	 * Template function to update multiple items of any type of variable, such as structs
+	 * The EEPROM will only be overwritten if different. This will reduce wear.
+	 */	 
 	template <class T> int updateBlock(int address, const T value[], int items)
 	{
 		int writeCount=0;
@@ -132,6 +147,10 @@ class EEPROMClassEx
 		return writeCount;
 	}
 	
+	/**
+	 * Template function to update any type of variable, such as structs
+	 * The EEPROM will only be overwritten if different. This will reduce wear.
+	 */	 
 	template <class T> int updateBlock(int address, const T& value)
 	{
 		int writeCount=0;
