@@ -28,9 +28,6 @@
 #include <inttypes.h>
 #include <avr/eeprom.h>
 
-// Boards with ATmega328, Duemilanove, Uno, UnoSMD, Lilypad - 1024 bytes (1 kilobyte)
-// Boards with ATmega1280 or 2560, Arduino Mega series – 4096 bytes (4 kilobytes)
-// Boards with ATmega168, Lilypad, old Nano, Diecimila  – 512 bytes (1/2 kilobyte)
 
 #define EEPROMSizeATmega168   512     
 #define EEPROMSizeATmega328   1024     
@@ -38,21 +35,28 @@
 #define EEPROMSizeATmega32u4  1024
 #define EEPROMSizeAT90USB1286 4096
 #define EEPROMSizeMK20DX128   2048
+#define EEPROMSizeMK20DX256   2048
+#define EEPROMSizeATSAMD21G18 16384          
 
 #define EEPROMSizeUno         EEPROMSizeATmega328     
 #define EEPROMSizeUnoSMD      EEPROMSizeATmega328
 #define EEPROMSizeLilypad     EEPROMSizeATmega328
 #define EEPROMSizeDuemilanove EEPROMSizeATmega328
+#define EEPROMSizePro         EEPROMSizeATmega328
+#define EEPROMSizeFio         EEPROMSizeATmega328
 #define EEPROMSizeMega        EEPROMSizeATmega1280
 #define EEPROMSizeDiecimila   EEPROMSizeATmega168
 #define EEPROMSizeNano        EEPROMSizeATmega168
 #define EEPROMSizeTeensy2     EEPROMSizeATmega32u4
 #define EEPROMSizeLeonardo    EEPROMSizeATmega32u4
 #define EEPROMSizeMicro       EEPROMSizeATmega32u4
+#define EEPROMSizeEsplora     EEPROMSizeATmega32u4
 #define EEPROMSizeYun         EEPROMSizeATmega32u4
+#define EEPROMSizeTre         EEPROMSizeATmega32u4
+#define EEPROMSizeZero        EEPROMSizeATSAMD21G18
 #define EEPROMSizeTeensy2pp   EEPROMSizeAT90USB1286
 #define EEPROMSizeTeensy3     EEPROMSizeMK20DX128
-
+#define EEPROMSizeTeensy31    EEPROMSizeMK20DX256
 class EEPROMClassEx
 {
 	  
