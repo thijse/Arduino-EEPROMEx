@@ -84,148 +84,152 @@
 <a name="l00028"></a>00028 <span class="preprocessor"></span><span class="preprocessor">#include &lt;inttypes.h&gt;</span>
 <a name="l00029"></a>00029 <span class="preprocessor">#include &lt;avr/eeprom.h&gt;</span>
 <a name="l00030"></a>00030 
-<a name="l00031"></a>00031 <span class="comment">// Boards with ATmega328, Duemilanove, Uno, UnoSMD, Lilypad - 1024 bytes (1 kilobyte)</span>
-<a name="l00032"></a>00032 <span class="comment">// Boards with ATmega1280 or 2560, Arduino Mega series – 4096 bytes (4 kilobytes)</span>
-<a name="l00033"></a>00033 <span class="comment">// Boards with ATmega168, Lilypad, old Nano, Diecimila  – 512 bytes (1/2 kilobyte)</span>
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035 <span class="preprocessor">#define EEPROMSizeATmega168   512     </span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeATmega328   1024     </span>
-<a name="l00037"></a>00037 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeATmega1280  4096     </span>
-<a name="l00038"></a>00038 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeATmega32u4  1024</span>
-<a name="l00039"></a>00039 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeAT90USB1286 4096</span>
-<a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeMK20DX128   2048</span>
-<a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a>00042 <span class="preprocessor">#define EEPROMSizeUno         EEPROMSizeATmega328     </span>
-<a name="l00043"></a>00043 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeUnoSMD      EEPROMSizeATmega328</span>
-<a name="l00044"></a>00044 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeLilypad     EEPROMSizeATmega328</span>
-<a name="l00045"></a>00045 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeDuemilanove EEPROMSizeATmega328</span>
-<a name="l00046"></a>00046 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeMega        EEPROMSizeATmega1280</span>
-<a name="l00047"></a>00047 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeDiecimila   EEPROMSizeATmega168</span>
-<a name="l00048"></a>00048 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeNano        EEPROMSizeATmega168</span>
-<a name="l00049"></a>00049 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeTeensy2     EEPROMSizeATmega32u4</span>
-<a name="l00050"></a>00050 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeLeonardo    EEPROMSizeATmega32u4</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeMicro       EEPROMSizeATmega32u4</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeYun         EEPROMSizeATmega32u4</span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeTeensy2pp   EEPROMSizeAT90USB1286</span>
-<a name="l00054"></a>00054 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeTeensy3     EEPROMSizeMK20DX128</span>
-<a name="l00055"></a>00055 <span class="preprocessor"></span>
-<a name="l00056"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html">00056</a> <span class="keyword">class </span><a class="code" href="class_e_e_p_r_o_m_class_ex.html">EEPROMClassEx</a>
-<a name="l00057"></a>00057 {
-<a name="l00058"></a>00058       
-<a name="l00059"></a>00059   <span class="keyword">public</span>:
-<a name="l00060"></a>00060     <a class="code" href="class_e_e_p_r_o_m_class_ex.html">EEPROMClassEx</a>();
-<a name="l00061"></a>00061     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ae27ed1053930d5aaa00613ea766c9b3a">isReady</a>();
-<a name="l00062"></a>00062     <span class="keywordtype">int</span>      writtenBytes();
-<a name="l00063"></a>00063     <span class="keywordtype">void</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a47319997cbc4d72eba5c8cf269b8e93d">setMemPool</a>(<span class="keywordtype">int</span> base, <span class="keywordtype">int</span> memSize);
-<a name="l00064"></a>00064     <span class="keywordtype">void</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a91d3c739083e09d493ad416ee65f9d48">setMaxAllowedWrites</a>(<span class="keywordtype">int</span> allowedWrites);
-<a name="l00065"></a>00065     <span class="keywordtype">int</span>      <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a710ca8281098379cfaaea954f3fafe4d">getAddress</a>(<span class="keywordtype">int</span> noOfBytes);
-<a name="l00066"></a>00066     
-<a name="l00067"></a>00067     uint8_t  <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a38237a074fe3bfe2a0d7bc9c1713dd13">read</a>(<span class="keywordtype">int</span>); 
-<a name="l00068"></a>00068     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a20bdae0a8e93e05ab8fd2d710dd1c27c">readBit</a>(<span class="keywordtype">int</span>, byte);
-<a name="l00069"></a>00069     uint8_t  <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ae384de4ce52cd0277b6c4a1abdbbcdde">readByte</a>(<span class="keywordtype">int</span>);
-<a name="l00070"></a>00070     uint16_t <a class="code" href="class_e_e_p_r_o_m_class_ex.html#aabec5d610d4a781035ffa262da304b13">readInt</a>(<span class="keywordtype">int</span>);
-<a name="l00071"></a>00071     uint32_t <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ae813ea216595740a5323a9bc64d65454">readLong</a>(<span class="keywordtype">int</span>);
-<a name="l00072"></a>00072     <span class="keywordtype">float</span>    <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a01fd3e12cbcd128cf0b1d9636c865358">readFloat</a>(<span class="keywordtype">int</span>);
-<a name="l00073"></a>00073     <span class="keywordtype">double</span>   <a class="code" href="class_e_e_p_r_o_m_class_ex.html#acb1a3c6a595d5fceb1a674349ca336ed">readDouble</a>(<span class="keywordtype">int</span>);
-<a name="l00074"></a>00074             
-<a name="l00075"></a>00075     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ad7038c62043bbd8455c6b25a3ad74d2b">write</a>(<span class="keywordtype">int</span>, uint8_t);
-<a name="l00076"></a>00076     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#abd38b73403e884a2a4f342189641568e">writeBit</a>(<span class="keywordtype">int</span> , uint8_t, <span class="keywordtype">bool</span>);
-<a name="l00077"></a>00077     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a806a1ccc7738b80ea35bc765c7d50873">writeByte</a>(<span class="keywordtype">int</span>, uint8_t);
-<a name="l00078"></a>00078     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#abed315ffe57451a64e2b5969bbe6877a">writeInt</a>(<span class="keywordtype">int</span>, uint16_t);
-<a name="l00079"></a>00079     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#afcda6a341fce9a29a76aa50cef7e18b7">writeLong</a>(<span class="keywordtype">int</span>, uint32_t);
-<a name="l00080"></a>00080     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#afe480fafc3c3bef7004a608ffec057b7">writeFloat</a>(<span class="keywordtype">int</span>, <span class="keywordtype">float</span>);
-<a name="l00081"></a>00081     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a599a67987cb1c5458e7581f6e65038f0">writeDouble</a>(<span class="keywordtype">int</span>, <span class="keywordtype">double</span>);
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ac7beb1411c6aa23bee0962416da4c2c6">update</a>(<span class="keywordtype">int</span>, uint8_t);
-<a name="l00084"></a>00084     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#add8a68511880ab2c1f84306b523ac4d0">updateBit</a>(<span class="keywordtype">int</span> , uint8_t, <span class="keywordtype">bool</span>);
-<a name="l00085"></a>00085     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a0f27aaf6f1f15b5f241e1f02adf2cca3">updateByte</a>(<span class="keywordtype">int</span>, uint8_t);
-<a name="l00086"></a>00086     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ab9318f1e54d016c4e63f8527b8e8831a">updateInt</a>(<span class="keywordtype">int</span>, uint16_t);
-<a name="l00087"></a>00087     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a23967375c0d3be05bb06f25feaf37ba4">updateLong</a>(<span class="keywordtype">int</span>, uint32_t);
-<a name="l00088"></a>00088     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ab3a125320adb9f23a79f7a2f339b63a6">updateFloat</a>(<span class="keywordtype">int</span>, <span class="keywordtype">float</span>);
-<a name="l00089"></a>00089     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#afccb344108ffcfb15c18f286f81cb0b0">updateDouble</a>(<span class="keywordtype">int</span>, <span class="keywordtype">double</span>);
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091     
-<a name="l00092"></a>00092     <span class="comment">// Use template for other data formats</span>
-<a name="l00093"></a>00093 
-<a name="l00097"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#a68bdb52683c33db51ca2e90b58c269db">00097</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a68bdb52683c33db51ca2e90b58c269db">readBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T value[], <span class="keywordtype">int</span> items)
-<a name="l00098"></a>00098     {
-<a name="l00099"></a>00099         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i;
-<a name="l00100"></a>00100         <span class="keywordflow">for</span> (i = 0; i &lt; (<span class="keywordtype">unsigned</span> int)items; i++)
-<a name="l00101"></a>00101             readBlock&lt;T&gt;(address+(i*<span class="keyword">sizeof</span>(T)),value[i]);
-<a name="l00102"></a>00102         <span class="keywordflow">return</span> i;
-<a name="l00103"></a>00103     }
-<a name="l00104"></a>00104 
-<a name="l00108"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#a8b05f428b4b7ab9c2bb2e56611257b93">00108</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a68bdb52683c33db51ca2e90b58c269db">readBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T&amp; value)
-<a name="l00109"></a>00109     {       
-<a name="l00110"></a>00110         eeprom_read_block((<span class="keywordtype">void</span>*)&amp;value, (<span class="keyword">const</span> <span class="keywordtype">void</span>*)address, <span class="keyword">sizeof</span>(value));
-<a name="l00111"></a>00111         <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(value);
-<a name="l00112"></a>00112     }
-<a name="l00113"></a>00113     
-<a name="l00117"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#ac72725102ea4bf52c642c8850e00ccfd">00117</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ac72725102ea4bf52c642c8850e00ccfd">writeBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T value[], <span class="keywordtype">int</span> items)
-<a name="l00118"></a>00118     {   
-<a name="l00119"></a>00119         <span class="keywordflow">if</span> (!isWriteOk(address+items*<span class="keyword">sizeof</span>(T))) <span class="keywordflow">return</span> 0;
-<a name="l00120"></a>00120         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i;
-<a name="l00121"></a>00121         <span class="keywordflow">for</span> (i = 0; i &lt; (<span class="keywordtype">unsigned</span> int)items; i++)
-<a name="l00122"></a>00122               writeBlock&lt;T&gt;(address+(i*<span class="keyword">sizeof</span>(T)),value[i]);
-<a name="l00123"></a>00123         <span class="keywordflow">return</span> i;
-<a name="l00124"></a>00124     }
-<a name="l00125"></a>00125 
-<a name="l00129"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#a55c4501260fb895f98a4b456e6ea23be">00129</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ac72725102ea4bf52c642c8850e00ccfd">writeBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T&amp; value)
-<a name="l00130"></a>00130     {
-<a name="l00131"></a>00131         <span class="keywordflow">if</span> (!isWriteOk(address+<span class="keyword">sizeof</span>(value))) <span class="keywordflow">return</span> 0;
-<a name="l00132"></a>00132         eeprom_write_block((<span class="keywordtype">void</span>*)&amp;value, (<span class="keywordtype">void</span>*)address, <span class="keyword">sizeof</span>(value));                         
-<a name="l00133"></a>00133         <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(value);
-<a name="l00134"></a>00134     }
-<a name="l00135"></a>00135      
-<a name="l00140"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#a474b7f64d3cbca4af980f313bd4ed9ba">00140</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a474b7f64d3cbca4af980f313bd4ed9ba">updateBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T value[], <span class="keywordtype">int</span> items)
-<a name="l00141"></a>00141     {
-<a name="l00142"></a>00142         <span class="keywordtype">int</span> writeCount=0;
-<a name="l00143"></a>00143         <span class="keywordflow">if</span> (!isWriteOk(address+items*<span class="keyword">sizeof</span>(T))) <span class="keywordflow">return</span> 0;
-<a name="l00144"></a>00144         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i;
-<a name="l00145"></a>00145         <span class="keywordflow">for</span> (i = 0; i &lt; (<span class="keywordtype">unsigned</span> int)items; i++)
-<a name="l00146"></a>00146               writeCount+= updateBlock&lt;T&gt;(address+(i*<span class="keyword">sizeof</span>(T)),value[i]);
-<a name="l00147"></a>00147         <span class="keywordflow">return</span> writeCount;
-<a name="l00148"></a>00148     }
-<a name="l00149"></a>00149     
-<a name="l00154"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#a2c53cdabc1eb7f872ade810f5a4031eb">00154</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a474b7f64d3cbca4af980f313bd4ed9ba">updateBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T&amp; value)
-<a name="l00155"></a>00155     {
-<a name="l00156"></a>00156         <span class="keywordtype">int</span> writeCount=0;
-<a name="l00157"></a>00157         <span class="keywordflow">if</span> (!isWriteOk(address+<span class="keyword">sizeof</span>(value))) <span class="keywordflow">return</span> 0;
-<a name="l00158"></a>00158         <span class="keyword">const</span> byte* bytePointer = (<span class="keyword">const</span> byte*)(<span class="keyword">const</span> <span class="keywordtype">void</span>*)&amp;value;
-<a name="l00159"></a>00159         <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; (<span class="keywordtype">unsigned</span> int)<span class="keyword">sizeof</span>(value); i++) {
-<a name="l00160"></a>00160             <span class="keywordflow">if</span> (<a class="code" href="class_e_e_p_r_o_m_class_ex.html#a38237a074fe3bfe2a0d7bc9c1713dd13">read</a>(address)!=*bytePointer) {
-<a name="l00161"></a>00161                 <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ad7038c62043bbd8455c6b25a3ad74d2b">write</a>(address, *bytePointer);
-<a name="l00162"></a>00162                 writeCount++;       
-<a name="l00163"></a>00163             }
-<a name="l00164"></a>00164             address++;
-<a name="l00165"></a>00165             bytePointer++;
-<a name="l00166"></a>00166         }
-<a name="l00167"></a>00167         <span class="keywordflow">return</span> writeCount;
-<a name="l00168"></a>00168     }
-<a name="l00169"></a>00169     
-<a name="l00170"></a>00170     
-<a name="l00171"></a>00171     
-<a name="l00172"></a>00172 <span class="keyword">private</span>:
-<a name="l00173"></a>00173     <span class="comment">//Private variables</span>
-<a name="l00174"></a>00174     <span class="keyword">static</span> <span class="keywordtype">int</span> _base;
-<a name="l00175"></a>00175     <span class="keyword">static</span> <span class="keywordtype">int</span> _memSize;
-<a name="l00176"></a>00176     <span class="keyword">static</span> <span class="keywordtype">int</span> _nextAvailableaddress;   
-<a name="l00177"></a>00177     <span class="keyword">static</span> <span class="keywordtype">int</span> _writeCounts;
-<a name="l00178"></a>00178     <span class="keywordtype">int</span> _allowedWrites; 
-<a name="l00179"></a>00179     <span class="keywordtype">bool</span> checkWrite(<span class="keywordtype">int</span> base,<span class="keywordtype">int</span> noOfBytes);    
-<a name="l00180"></a>00180     <span class="keywordtype">bool</span> isWriteOk(<span class="keywordtype">int</span> address);
-<a name="l00181"></a>00181     <span class="keywordtype">bool</span> isReadOk(<span class="keywordtype">int</span> address);
-<a name="l00182"></a>00182 };
-<a name="l00183"></a>00183 
-<a name="l00184"></a>00184 <span class="keyword">extern</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html">EEPROMClassEx</a> EEPROM;
-<a name="l00185"></a>00185 
-<a name="l00186"></a>00186 <span class="preprocessor">#endif</span>
-<a name="l00187"></a>00187 <span class="preprocessor"></span>
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032 <span class="preprocessor">#define EEPROMSizeATmega168   512     </span>
+<a name="l00033"></a>00033 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeATmega328   1024     </span>
+<a name="l00034"></a>00034 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeATmega1280  4096     </span>
+<a name="l00035"></a>00035 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeATmega32u4  1024</span>
+<a name="l00036"></a>00036 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeAT90USB1286 4096</span>
+<a name="l00037"></a>00037 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeMK20DX128   2048</span>
+<a name="l00038"></a>00038 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeMK20DX256   2048</span>
+<a name="l00039"></a>00039 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeATSAMD21G18 16384          </span>
+<a name="l00040"></a>00040 <span class="preprocessor"></span>
+<a name="l00041"></a>00041 <span class="preprocessor">#define EEPROMSizeUno         EEPROMSizeATmega328     </span>
+<a name="l00042"></a>00042 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeUnoSMD      EEPROMSizeATmega328</span>
+<a name="l00043"></a>00043 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeLilypad     EEPROMSizeATmega328</span>
+<a name="l00044"></a>00044 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeDuemilanove EEPROMSizeATmega328</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizePro         EEPROMSizeATmega328</span>
+<a name="l00046"></a>00046 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeFio         EEPROMSizeATmega328</span>
+<a name="l00047"></a>00047 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeMega        EEPROMSizeATmega1280</span>
+<a name="l00048"></a>00048 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeDiecimila   EEPROMSizeATmega168</span>
+<a name="l00049"></a>00049 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeNano        EEPROMSizeATmega168</span>
+<a name="l00050"></a>00050 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeTeensy2     EEPROMSizeATmega32u4</span>
+<a name="l00051"></a>00051 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeLeonardo    EEPROMSizeATmega32u4</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeMicro       EEPROMSizeATmega32u4</span>
+<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeEsplora     EEPROMSizeATmega32u4</span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeYun         EEPROMSizeATmega32u4</span>
+<a name="l00055"></a>00055 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeTre         EEPROMSizeATmega32u4</span>
+<a name="l00056"></a>00056 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeZero        EEPROMSizeATSAMD21G18</span>
+<a name="l00057"></a>00057 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeTeensy2pp   EEPROMSizeAT90USB1286</span>
+<a name="l00058"></a>00058 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeTeensy3     EEPROMSizeMK20DX128</span>
+<a name="l00059"></a>00059 <span class="preprocessor"></span><span class="preprocessor">#define EEPROMSizeTeensy31    EEPROMSizeMK20DX256</span>
+<a name="l00060"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html">00060</a> <span class="preprocessor"></span><span class="keyword">class </span><a class="code" href="class_e_e_p_r_o_m_class_ex.html">EEPROMClassEx</a>
+<a name="l00061"></a>00061 {
+<a name="l00062"></a>00062       
+<a name="l00063"></a>00063   <span class="keyword">public</span>:
+<a name="l00064"></a>00064     <a class="code" href="class_e_e_p_r_o_m_class_ex.html">EEPROMClassEx</a>();
+<a name="l00065"></a>00065     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ae27ed1053930d5aaa00613ea766c9b3a">isReady</a>();
+<a name="l00066"></a>00066     <span class="keywordtype">int</span>      writtenBytes();
+<a name="l00067"></a>00067     <span class="keywordtype">void</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a47319997cbc4d72eba5c8cf269b8e93d">setMemPool</a>(<span class="keywordtype">int</span> base, <span class="keywordtype">int</span> memSize);
+<a name="l00068"></a>00068     <span class="keywordtype">void</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a91d3c739083e09d493ad416ee65f9d48">setMaxAllowedWrites</a>(<span class="keywordtype">int</span> allowedWrites);
+<a name="l00069"></a>00069     <span class="keywordtype">int</span>      <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a710ca8281098379cfaaea954f3fafe4d">getAddress</a>(<span class="keywordtype">int</span> noOfBytes);
+<a name="l00070"></a>00070     
+<a name="l00071"></a>00071     uint8_t  <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a38237a074fe3bfe2a0d7bc9c1713dd13">read</a>(<span class="keywordtype">int</span>); 
+<a name="l00072"></a>00072     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a20bdae0a8e93e05ab8fd2d710dd1c27c">readBit</a>(<span class="keywordtype">int</span>, byte);
+<a name="l00073"></a>00073     uint8_t  <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ae384de4ce52cd0277b6c4a1abdbbcdde">readByte</a>(<span class="keywordtype">int</span>);
+<a name="l00074"></a>00074     uint16_t <a class="code" href="class_e_e_p_r_o_m_class_ex.html#aabec5d610d4a781035ffa262da304b13">readInt</a>(<span class="keywordtype">int</span>);
+<a name="l00075"></a>00075     uint32_t <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ae813ea216595740a5323a9bc64d65454">readLong</a>(<span class="keywordtype">int</span>);
+<a name="l00076"></a>00076     <span class="keywordtype">float</span>    <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a01fd3e12cbcd128cf0b1d9636c865358">readFloat</a>(<span class="keywordtype">int</span>);
+<a name="l00077"></a>00077     <span class="keywordtype">double</span>   <a class="code" href="class_e_e_p_r_o_m_class_ex.html#acb1a3c6a595d5fceb1a674349ca336ed">readDouble</a>(<span class="keywordtype">int</span>);
+<a name="l00078"></a>00078             
+<a name="l00079"></a>00079     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ad7038c62043bbd8455c6b25a3ad74d2b">write</a>(<span class="keywordtype">int</span>, uint8_t);
+<a name="l00080"></a>00080     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#abd38b73403e884a2a4f342189641568e">writeBit</a>(<span class="keywordtype">int</span> , uint8_t, <span class="keywordtype">bool</span>);
+<a name="l00081"></a>00081     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a806a1ccc7738b80ea35bc765c7d50873">writeByte</a>(<span class="keywordtype">int</span>, uint8_t);
+<a name="l00082"></a>00082     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#abed315ffe57451a64e2b5969bbe6877a">writeInt</a>(<span class="keywordtype">int</span>, uint16_t);
+<a name="l00083"></a>00083     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#afcda6a341fce9a29a76aa50cef7e18b7">writeLong</a>(<span class="keywordtype">int</span>, uint32_t);
+<a name="l00084"></a>00084     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#afe480fafc3c3bef7004a608ffec057b7">writeFloat</a>(<span class="keywordtype">int</span>, <span class="keywordtype">float</span>);
+<a name="l00085"></a>00085     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a599a67987cb1c5458e7581f6e65038f0">writeDouble</a>(<span class="keywordtype">int</span>, <span class="keywordtype">double</span>);
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ac7beb1411c6aa23bee0962416da4c2c6">update</a>(<span class="keywordtype">int</span>, uint8_t);
+<a name="l00088"></a>00088     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#add8a68511880ab2c1f84306b523ac4d0">updateBit</a>(<span class="keywordtype">int</span> , uint8_t, <span class="keywordtype">bool</span>);
+<a name="l00089"></a>00089     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a0f27aaf6f1f15b5f241e1f02adf2cca3">updateByte</a>(<span class="keywordtype">int</span>, uint8_t);
+<a name="l00090"></a>00090     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ab9318f1e54d016c4e63f8527b8e8831a">updateInt</a>(<span class="keywordtype">int</span>, uint16_t);
+<a name="l00091"></a>00091     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a23967375c0d3be05bb06f25feaf37ba4">updateLong</a>(<span class="keywordtype">int</span>, uint32_t);
+<a name="l00092"></a>00092     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ab3a125320adb9f23a79f7a2f339b63a6">updateFloat</a>(<span class="keywordtype">int</span>, <span class="keywordtype">float</span>);
+<a name="l00093"></a>00093     <span class="keywordtype">bool</span>     <a class="code" href="class_e_e_p_r_o_m_class_ex.html#afccb344108ffcfb15c18f286f81cb0b0">updateDouble</a>(<span class="keywordtype">int</span>, <span class="keywordtype">double</span>);
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095     
+<a name="l00096"></a>00096     <span class="comment">// Use template for other data formats</span>
+<a name="l00097"></a>00097 
+<a name="l00101"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#a68bdb52683c33db51ca2e90b58c269db">00101</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a68bdb52683c33db51ca2e90b58c269db">readBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T value[], <span class="keywordtype">int</span> items)
+<a name="l00102"></a>00102     {
+<a name="l00103"></a>00103         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i;
+<a name="l00104"></a>00104         <span class="keywordflow">for</span> (i = 0; i &lt; (<span class="keywordtype">unsigned</span> int)items; i++)
+<a name="l00105"></a>00105             readBlock&lt;T&gt;(address+(i*<span class="keyword">sizeof</span>(T)),value[i]);
+<a name="l00106"></a>00106         <span class="keywordflow">return</span> i;
+<a name="l00107"></a>00107     }
+<a name="l00108"></a>00108 
+<a name="l00112"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#a8b05f428b4b7ab9c2bb2e56611257b93">00112</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a68bdb52683c33db51ca2e90b58c269db">readBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T&amp; value)
+<a name="l00113"></a>00113     {       
+<a name="l00114"></a>00114         eeprom_read_block((<span class="keywordtype">void</span>*)&amp;value, (<span class="keyword">const</span> <span class="keywordtype">void</span>*)address, <span class="keyword">sizeof</span>(value));
+<a name="l00115"></a>00115         <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(value);
+<a name="l00116"></a>00116     }
+<a name="l00117"></a>00117     
+<a name="l00121"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#ac72725102ea4bf52c642c8850e00ccfd">00121</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ac72725102ea4bf52c642c8850e00ccfd">writeBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T value[], <span class="keywordtype">int</span> items)
+<a name="l00122"></a>00122     {   
+<a name="l00123"></a>00123         <span class="keywordflow">if</span> (!isWriteOk(address+items*<span class="keyword">sizeof</span>(T))) <span class="keywordflow">return</span> 0;
+<a name="l00124"></a>00124         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i;
+<a name="l00125"></a>00125         <span class="keywordflow">for</span> (i = 0; i &lt; (<span class="keywordtype">unsigned</span> int)items; i++)
+<a name="l00126"></a>00126               writeBlock&lt;T&gt;(address+(i*<span class="keyword">sizeof</span>(T)),value[i]);
+<a name="l00127"></a>00127         <span class="keywordflow">return</span> i;
+<a name="l00128"></a>00128     }
+<a name="l00129"></a>00129 
+<a name="l00133"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#a55c4501260fb895f98a4b456e6ea23be">00133</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ac72725102ea4bf52c642c8850e00ccfd">writeBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T&amp; value)
+<a name="l00134"></a>00134     {
+<a name="l00135"></a>00135         <span class="keywordflow">if</span> (!isWriteOk(address+<span class="keyword">sizeof</span>(value))) <span class="keywordflow">return</span> 0;
+<a name="l00136"></a>00136         eeprom_write_block((<span class="keywordtype">void</span>*)&amp;value, (<span class="keywordtype">void</span>*)address, <span class="keyword">sizeof</span>(value));                         
+<a name="l00137"></a>00137         <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(value);
+<a name="l00138"></a>00138     }
+<a name="l00139"></a>00139      
+<a name="l00144"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#a474b7f64d3cbca4af980f313bd4ed9ba">00144</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a474b7f64d3cbca4af980f313bd4ed9ba">updateBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T value[], <span class="keywordtype">int</span> items)
+<a name="l00145"></a>00145     {
+<a name="l00146"></a>00146         <span class="keywordtype">int</span> writeCount=0;
+<a name="l00147"></a>00147         <span class="keywordflow">if</span> (!isWriteOk(address+items*<span class="keyword">sizeof</span>(T))) <span class="keywordflow">return</span> 0;
+<a name="l00148"></a>00148         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i;
+<a name="l00149"></a>00149         <span class="keywordflow">for</span> (i = 0; i &lt; (<span class="keywordtype">unsigned</span> int)items; i++)
+<a name="l00150"></a>00150               writeCount+= updateBlock&lt;T&gt;(address+(i*<span class="keyword">sizeof</span>(T)),value[i]);
+<a name="l00151"></a>00151         <span class="keywordflow">return</span> writeCount;
+<a name="l00152"></a>00152     }
+<a name="l00153"></a>00153     
+<a name="l00158"></a><a class="code" href="class_e_e_p_r_o_m_class_ex.html#a2c53cdabc1eb7f872ade810f5a4031eb">00158</a>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">int</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html#a474b7f64d3cbca4af980f313bd4ed9ba">updateBlock</a>(<span class="keywordtype">int</span> address, <span class="keyword">const</span> T&amp; value)
+<a name="l00159"></a>00159     {
+<a name="l00160"></a>00160         <span class="keywordtype">int</span> writeCount=0;
+<a name="l00161"></a>00161         <span class="keywordflow">if</span> (!isWriteOk(address+<span class="keyword">sizeof</span>(value))) <span class="keywordflow">return</span> 0;
+<a name="l00162"></a>00162         <span class="keyword">const</span> byte* bytePointer = (<span class="keyword">const</span> byte*)(<span class="keyword">const</span> <span class="keywordtype">void</span>*)&amp;value;
+<a name="l00163"></a>00163         <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; (<span class="keywordtype">unsigned</span> int)<span class="keyword">sizeof</span>(value); i++) {
+<a name="l00164"></a>00164             <span class="keywordflow">if</span> (<a class="code" href="class_e_e_p_r_o_m_class_ex.html#a38237a074fe3bfe2a0d7bc9c1713dd13">read</a>(address)!=*bytePointer) {
+<a name="l00165"></a>00165                 <a class="code" href="class_e_e_p_r_o_m_class_ex.html#ad7038c62043bbd8455c6b25a3ad74d2b">write</a>(address, *bytePointer);
+<a name="l00166"></a>00166                 writeCount++;       
+<a name="l00167"></a>00167             }
+<a name="l00168"></a>00168             address++;
+<a name="l00169"></a>00169             bytePointer++;
+<a name="l00170"></a>00170         }
+<a name="l00171"></a>00171         <span class="keywordflow">return</span> writeCount;
+<a name="l00172"></a>00172     }
+<a name="l00173"></a>00173     
+<a name="l00174"></a>00174     
+<a name="l00175"></a>00175     
+<a name="l00176"></a>00176 <span class="keyword">private</span>:
+<a name="l00177"></a>00177     <span class="comment">//Private variables</span>
+<a name="l00178"></a>00178     <span class="keyword">static</span> <span class="keywordtype">int</span> _base;
+<a name="l00179"></a>00179     <span class="keyword">static</span> <span class="keywordtype">int</span> _memSize;
+<a name="l00180"></a>00180     <span class="keyword">static</span> <span class="keywordtype">int</span> _nextAvailableaddress;   
+<a name="l00181"></a>00181     <span class="keyword">static</span> <span class="keywordtype">int</span> _writeCounts;
+<a name="l00182"></a>00182     <span class="keywordtype">int</span> _allowedWrites; 
+<a name="l00183"></a>00183     <span class="keywordtype">bool</span> checkWrite(<span class="keywordtype">int</span> base,<span class="keywordtype">int</span> noOfBytes);    
+<a name="l00184"></a>00184     <span class="keywordtype">bool</span> isWriteOk(<span class="keywordtype">int</span> address);
+<a name="l00185"></a>00185     <span class="keywordtype">bool</span> isReadOk(<span class="keywordtype">int</span> address);
+<a name="l00186"></a>00186 };
+<a name="l00187"></a>00187 
+<a name="l00188"></a>00188 <span class="keyword">extern</span> <a class="code" href="class_e_e_p_r_o_m_class_ex.html">EEPROMClassEx</a> EEPROM;
+<a name="l00189"></a>00189 
+<a name="l00190"></a>00190 <span class="preprocessor">#endif</span>
+<a name="l00191"></a>00191 <span class="preprocessor"></span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 22 2015 18:30:19 for EEPROMEx by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 24 2015 22:59:08 for EEPROMEx by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
