@@ -24,14 +24,17 @@
 template<typename T> class EEPROMVar 
 {
 	public:
-	  EEPROMVar(T init) {
-		address = EEPROM.getAddress(sizeof(T));	
-		var = init;
 	  }
+	  EEPROMVar(const T& init):
+		var(init),
+		address(EEPROM.getAddress(sizeof(T)))
+	  {
+	  }
+
 	  operator T () { 
 		return var; 
 	  }
-	  EEPROMVar &operator=(T val) {
+	  EEPROMVar &operator=(const T& val) {
 		var = val;
 		return *this;
 	  }
