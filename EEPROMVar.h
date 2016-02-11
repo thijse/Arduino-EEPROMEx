@@ -21,6 +21,9 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#ifndef EEPROMVAR_h
+#define EEPROMVAR_h
+
 template<typename T> class EEPROMVar 
 {
 	public:
@@ -84,3 +87,5 @@ template<typename T> class EEPROMVar
 	  T var;
 	  int address;
 };
+
+#endif //EEPROMVAR_h
