@@ -27,7 +27,6 @@
 template<typename T> class EEPROMVar 
 {
 	public:
-	  }
 	  EEPROMVar(const T& init):
 		var(init),
 		address(EEPROM.getAddress(sizeof(T)))
