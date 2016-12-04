@@ -310,7 +310,7 @@ bool EEPROMClassEx::updateFloat(int address, float value)
  */
 bool EEPROMClassEx::updateDouble(int address, double value)
 {
-	return (writeBlock<double>(address, value)!=0);
+	return (updateBlock<double>(address, value)!=0);
 }
 
 /**
