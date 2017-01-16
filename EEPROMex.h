@@ -28,6 +28,13 @@
 #include <inttypes.h>
 #include <avr/eeprom.h>
 
+#define EEPROMSize1k         1024
+#define EEPROMSize2k         2048
+#define EEPROMSize4k         4096
+#define EEPROMSize8k         8192
+#define EEPROMSize16k        16384
+#define EEPROMSize32k        32768
+#define EEPROMSize64k        65536
 
 #define EEPROMSizeATmega168   512     
 #define EEPROMSizeATmega328   1024     
