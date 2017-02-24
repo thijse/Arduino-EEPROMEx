@@ -1,4 +1,6 @@
 # Arduino EEPROMEx library 
+[![Build Status](https://travis-ci.org/thijse/Arduino-EEPROMEx.svg?branch=master)](https://travis-ci.org/thijse/Arduino-EEPROMEx)
+[![License: LGPL v21](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)
 
 The EEPROMex library is an extension of the standard Arduino EEPROM library. It extends the functionality of the original Arduino EEPROM library with:
 
