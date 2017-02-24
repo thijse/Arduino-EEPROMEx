@@ -10,8 +10,7 @@ before_install:
 install:
   - ln -s $PWD /usr/local/share/arduino/libraries/EEPROMEx
 script:
-  - arduino --verify --board arduino:avr:uno $PWD/examples/EEPROMEx/EEPROMEx.ino
-  - arduino --verify --board arduino:avr:uno $PWD/examples/EEPROMVar/EEPROMVar.ino
+  - arduino --verify --board arduino:avr:uno $PWD/examples/EEPROMEx/EEPROMEx.ino  
 notifications:
   email:
     on_success: change
