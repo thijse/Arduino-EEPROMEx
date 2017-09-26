@@ -169,4 +169,4 @@ bool isReady();
 
 ## Copyright
 
-EEPROMEx is provided Copyright © 2013,2014,2015 under LGPL License.
+EEPROMEx is provided Copyright © 2013-2017 under LGPL License.
